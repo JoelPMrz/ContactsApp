@@ -3,7 +3,7 @@ package com.example.contactsapp.data.model
 import com.example.contactsapp.R
 
 data class Contact (
-    val id: Int = 0,
+    val id: Int,
     var name: String,
     var number: String,
     val image: Int = R.drawable.contact,

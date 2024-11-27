@@ -11,11 +11,13 @@ class ContactViewModel(context: Context) : ViewModel() {
 
     private val sharedPreferencesManager = SharedPreferencesManager(context)
 
-    private var nextId: Int = 0
+
 
     private val _contacts = mutableStateListOf<Contact>().apply {
         addAll(sharedPreferencesManager.loadContacts())
     }
+
+    private var nextId: Int = (_contacts.maxOfOrNull { it.id } ?: 0) + 1
 
     val contacts: List<Contact> get() = _contacts.sortedBy { it.name }
     val favContacts: List<Contact> get() = contacts.filter { it.isFavorite }
@@ -38,7 +40,8 @@ class ContactViewModel(context: Context) : ViewModel() {
     }
 
     fun addContact(contact: Contact) {
-        _contacts.add(contact)
+        val newContact = contact.copy(id = nextId)
+        _contacts.add(newContact)
         nextId++
         sharedPreferencesManager.saveContacts(_contacts)
     }

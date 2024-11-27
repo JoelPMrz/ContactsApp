@@ -70,7 +70,8 @@ fun Content(favContacts: List<Contact>, contacts: List<Contact>, paddingValues :
         ContactList(
             title = "Favoritos",
             contactList = favContacts,
-            navController = navController
+            navController = navController,
+            height = 275.dp
         )
 
         Spacer(modifier = Modifier.height(16.dp))
